@@ -1,6 +1,13 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+export const HeaderMenu = styled.header`
+  top: 0px;
+  width: 100%;
+  background: #ffffff;
+  z-index: 3;
+`;
+
 export const Container = styled.ul`
   display: flex;
   flex-wrap: wrap;

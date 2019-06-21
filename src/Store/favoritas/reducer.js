@@ -29,5 +29,10 @@ export const Creators = {
   successFavoritas: data => ({
     type: Types.SUCCESS_FAVORITA,
     payload: { data }
+  }),
+
+  addFavoritas: favorita => ({
+    type: Types.ADD_FAVORITA,
+    payload: { favorita }
   })
 };

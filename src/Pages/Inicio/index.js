@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Creators as ImagensCreators } from "../../Store/imagens/reducer";
+import { Creators as FavoritasCreators } from "../../Store/favoritas/reducer";
 
 import Image from "../../Components/Image";
 
@@ -15,12 +16,23 @@ class Inicio extends Component {
   }
 
   render() {
+    const { addFavoritas } = this.props;
     const { data = [], isLoading } = this.props.imagens;
-    console.log("img", data);
 
     return (
       <Container>
-        {!isLoading && data.length >= 1 ? <Image /> : "...carregando"}
+        {!isLoading && data.length >= 1
+          ? data.map((image, index) => (
+              <Image
+                key={index}
+                imageSrc={image.url}
+                descricao={image.descricao}
+                isFavorita={false}
+                dispatch={addFavoritas}
+                item={image}
+              />
+            ))
+          : "...carregando"}
       </Container>
     );
   }
@@ -31,7 +43,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(ImagensCreators, dispatch);
+  bindActionCreators({ ...ImagensCreators, ...FavoritasCreators }, dispatch);
 
 export default connect(
   mapStateToProps,

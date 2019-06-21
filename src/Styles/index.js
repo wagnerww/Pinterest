@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const GlobalStyle = createGlobalStyle`
 
