@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Creators as ImagensCreators } from "../../Store/imagens/reducer";
 import { Creators as FavoritasCreators } from "../../Store/favoritas/reducer";
 
 import Image from "../../Components/Image";
@@ -11,13 +10,13 @@ import { Container } from "./styles";
 
 class Inicio extends Component {
   componentDidMount() {
-    const { requestImagens } = this.props;
-    requestImagens();
+    const { requestFavoritas } = this.props;
+    requestFavoritas();
   }
 
   render() {
-    const { addFavoritas } = this.props;
-    const { data = [], isLoading } = this.props.imagens;
+    const { removeFavoritas } = this.props;
+    const { data = [], isLoading } = this.props.favoritas;
 
     return (
       <Container>
@@ -27,8 +26,8 @@ class Inicio extends Component {
                 key={index}
                 imageSrc={image.url}
                 descricao={image.descricao}
-                isFavorita={false}
-                dispatch={addFavoritas}
+                isFavorita={true}
+                dispatch={removeFavoritas}
                 item={image}
               />
             ))
@@ -39,11 +38,11 @@ class Inicio extends Component {
 }
 
 const mapStateToProps = state => ({
-  imagens: state.imagens
+  favoritas: state.favoritas
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ ...ImagensCreators, ...FavoritasCreators }, dispatch);
+  bindActionCreators(FavoritasCreators, dispatch);
 
 export default connect(
   mapStateToProps,

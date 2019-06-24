@@ -4,11 +4,20 @@ import { Types as ImagensTypes } from "./imagens/reducer";
 import { requestImagens } from "./imagens/sagas";
 
 import { Types as FavoritasTypes } from "./favoritas/reducer";
-import { addFavorita } from "./favoritas/sagas";
+import {
+  addFavorita,
+  requestFavoritas,
+  removeFavorita
+} from "./favoritas/sagas";
 
 export default function* rootSaga() {
   return yield all([
+    /* IMAGENS */
     takeLatest(ImagensTypes.REQUEST_IMAGENS, requestImagens),
-    takeLatest(FavoritasTypes.ADD_FAVORITA, addFavorita)
+
+    /* FAVORITAS */
+    takeLatest(FavoritasTypes.REQUEST_FAVORITA, requestFavoritas),
+    takeLatest(FavoritasTypes.ADD_FAVORITA, addFavorita),
+    takeLatest(FavoritasTypes.REMOVE_FAVORITA, removeFavorita)
   ]);
 }
