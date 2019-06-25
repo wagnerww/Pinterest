@@ -3,11 +3,22 @@ import { call, put } from "redux-saga/effects";
 import { Creators } from "./reducer";
 import api from "../../Services/api";
 
-export function* requestImagens() {
+export function* requestImagens({ payload }) {
   try {
-    const { data } = yield call(api.get, "/imagens");
+    const { page } = payload;
+    const response = yield call(
+      api.get,
+      `/imagens?_limit=10&_page=${page ? page : 1}`
+    );
 
-    yield put(Creators.successImagens(data));
+    const { data } = response;
+    const totalRecords = response.headers["x-total-count"];
+
+    if (page === 1) {
+      yield put(Creators.successImagens(data, totalRecords));
+    } else {
+      yield put(Creators.nextPageImagens(data, totalRecords));
+    }
   } catch (error) {
     yield put(Creators.failureImagens());
   }

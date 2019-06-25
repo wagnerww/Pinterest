@@ -3,22 +3,37 @@ import Immutable from "seamless-immutable";
 export const Types = {
   REQUEST_IMAGENS: "IMAGENS/REQUEST_IMAGENS",
   SUCCESS_IMAGENS: "IMAGENS/SUCCESS_IMAGENS",
-  FAILURE_IMAGENS: "IMAGENS/FAILURE_IMAGENS"
+  FAILURE_IMAGENS: "IMAGENS/FAILURE_IMAGENS",
+  NEXT_PAGE_IMAGENS: "IMAGENS/NEXT_PAGE_IMAGENS"
 };
 
 const INITIAL_STATE = Immutable({
   isLoading: false,
-  data: []
+  data: [],
+  totalRecords: 0
 });
 
 export default function imagens(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.REQUEST_IMAGENS:
-      return { isLoading: true };
+      return { ...state, isLoading: true, totalRecords: 0 };
 
     case Types.SUCCESS_IMAGENS:
-      return { isLoading: false, data: action.payload.data };
+      return {
+        isLoading: false,
+        data: action.payload.data,
+        totalRecords: action.payload.totalRecords
+      };
 
+    case Types.NEXT_PAGE_IMAGENS: {
+      const dados = {
+        isLoading: false,
+        data: [...state.data, ...action.payload.data],
+        totalRecords: action.payload.totalRecords
+      };
+
+      return dados;
+    }
     case Types.FAILURE_IMAGENS:
       return { isLoading: false };
 
@@ -28,12 +43,12 @@ export default function imagens(state = INITIAL_STATE, action) {
 }
 
 export const Creators = {
-  requestImagens: () => ({
+  requestImagens: page => ({
     type: Types.REQUEST_IMAGENS,
-    payload: {}
+    payload: { page }
   }),
 
-  successImagens: data => ({
+  successImagens: (data, totalRecords) => ({
     type: Types.SUCCESS_IMAGENS,
     payload: { data }
   }),
@@ -41,5 +56,10 @@ export const Creators = {
   failureImagens: () => ({
     type: Types.FAILURE_IMAGENS,
     payload: {}
+  }),
+
+  nextPageImagens: (data, totalRecords) => ({
+    type: Types.NEXT_PAGE_IMAGENS,
+    payload: { data, totalRecords }
   })
 };

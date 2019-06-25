@@ -39,6 +39,11 @@ export const LinkHeader = styled(Link)`
   &:hover {
     background: #efefef;
   }
+
+  &:hover > div {
+    display: flex;
+    flex-wrap: wrap;
+  }
 `;
 
 export const IconLink = styled(LinkHeader)`

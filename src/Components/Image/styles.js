@@ -1,18 +1,30 @@
 import styled from "styled-components";
 
-export const Actions = styled.div`
+export const Button = styled.button`
   display: none;
-  padding-top: 10px;
-  padding-right: 30px;
-  position: absolute;
-  justify-content: flex-end;
-  width: 100%;
+  padding: 11px 15px;
+  background: #e60023;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 0.95em;
+  border: 0px;
+  border-radius: 10px;
+  cursor: pointer;
   z-index: 1;
+  position: absolute;
+  align-self: flex-end;
+  margin-top: 10px;
+  right: 20px;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
 `;
 
 export const Container = styled.div`
-  max-width: 20%;
+  max-width: 250px;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   align-items: flex-start;
   padding: 10px 10px 15px 10px;
@@ -36,26 +48,11 @@ export const Container = styled.div`
     background: #efefef;
   }
 
-  &:hover ${Actions} {
-    display: flex;
+  &:hover ${Button} {
+    display: block;
   }
 
   &:hover img {
     filter: brightness(0.8);
-  }
-`;
-
-export const Button = styled.button`
-  padding: 11px 15px;
-  background: #e60023;
-  color: #ffffff;
-  font-weight: bold;
-  font-size: 0.95em;
-  border: 0px;
-  border-radius: 10px;
-  cursor: pointer;
-
-  &:hover {
-    filter: brightness(0.9);
   }
 `;

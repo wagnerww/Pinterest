@@ -7,7 +7,8 @@ import { Types as FavoritasTypes } from "./favoritas/reducer";
 import {
   addFavorita,
   requestFavoritas,
-  removeFavorita
+  removeFavorita,
+  requestLastFavoritas
 } from "./favoritas/sagas";
 
 export default function* rootSaga() {
@@ -18,6 +19,7 @@ export default function* rootSaga() {
     /* FAVORITAS */
     takeLatest(FavoritasTypes.REQUEST_FAVORITA, requestFavoritas),
     takeLatest(FavoritasTypes.ADD_FAVORITA, addFavorita),
-    takeLatest(FavoritasTypes.REMOVE_FAVORITA, removeFavorita)
+    takeLatest(FavoritasTypes.REMOVE_FAVORITA, removeFavorita),
+    takeLatest(FavoritasTypes.REQUEST_LAST_FAVORITAS, requestLastFavoritas)
   ]);
 }

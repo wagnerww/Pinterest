@@ -10,6 +10,17 @@ export function* requestFavoritas() {
   } catch (error) {}
 }
 
+export function* requestLastFavoritas({ payload }) {
+  try {
+    const { limit } = payload;
+    const { data } = yield call(
+      api.get,
+      `/favoritas?_sort=criacao&_order=desc&_limit=${limit}`
+    );
+    yield put(ActionsFavoritas.successLastFavoritas(data));
+  } catch (error) {}
+}
+
 export function* addFavorita({ payload }) {
   try {
     const { favorita } = payload;

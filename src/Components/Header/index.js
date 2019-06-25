@@ -13,6 +13,8 @@ import {
   HeaderMenu
 } from "./styles";
 
+import Baloon from "../Baloon";
+
 function menuScrool() {
   var header = document.getElementById("myHeader");
   var sticky = header.offsetTop;
@@ -68,6 +70,7 @@ const Header = () => (
         <ContainerItem>
           <IconLink>
             <i class="fab fa-gratipay" />
+            <Baloon />
           </IconLink>
         </ContainerItem>
       </Container>
