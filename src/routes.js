@@ -1,20 +1,34 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import Header from "../src/Components/Header";
+import Header from "./Components/Header";
 import Toast from "./Components/Toast";
 
 import Inicio from "./Pages/Inicio";
 import Favoritas from "./Pages/Favoritas";
 
+const Main = ({ component: Component, ...props }) => (
+  <Fragment>
+    <Header {...props} />
+    <Component />
+    <Toast />
+  </Fragment>
+);
+
 const Routes = () => (
   <BrowserRouter>
-    <Header />
     <Switch>
-      <Route exact path="/" component={Inicio} />
-      <Route path="/favoritas" component={Favoritas} />
+      <Route
+        exact
+        path="/"
+        render={props => <Main component={Inicio} {...props} />}
+      />
+      <Route
+        exact
+        path="/favoritas"
+        render={props => <Main component={Favoritas} {...props} />}
+      />
     </Switch>
-    <Toast />
   </BrowserRouter>
 );
 

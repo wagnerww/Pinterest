@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { bindActionCreators } from "redux";
@@ -8,11 +8,17 @@ import { Creators as FavoritasCreators } from "../../Store/favoritas/reducer";
 
 import Image from "../../Components/Image";
 
-import { Container } from "./styles";
+import {
+  Container,
+  ConcluidoDetail,
+  ContainerConcluido,
+  SeparadorConcluido
+} from "./styles";
 
 class Inicio extends Component {
   state = {
-    page: 0
+    page: 0,
+    asMore: true
   };
 
   componentDidMount() {
@@ -22,33 +28,54 @@ class Inicio extends Component {
   loadPage = () => {
     let nextPage = this.state.page + 1;
     const { requestImagens } = this.props;
-    this.setState({ page: nextPage });
+    const { imagens } = this.props;
+    const { totalRecords, data } = imagens;
+    let hasMore = true;
+    if (totalRecords == data.length && totalRecords != 0) {
+      hasMore = false;
+    }
+
+    this.setState({ page: nextPage, hasMore });
     requestImagens(nextPage);
   };
 
   render() {
-    const { addFavoritas, imagens, totalRecords } = this.props;
+    const { addFavoritas, imagens } = this.props;
     const { data = [] } = imagens;
+    const { hasMore } = this.state;
 
     return (
-      <InfiniteScroll
-        dataLength={totalRecords}
-        next={this.loadPage}
-        hasMore={true}
-      >
+      <Fragment>
         <Container>
-          {data.map((image, index) => (
-            <Image
-              key={index}
-              imageSrc={image.url}
-              descricao={image.descricao}
-              isFavorita={false}
-              dispatch={addFavoritas}
-              item={image}
-            />
-          ))}
+          <InfiniteScroll
+            dataLength={data.length}
+            next={this.loadPage}
+            hasMore={hasMore}
+          >
+            {data.map((image, index) => (
+              <Image
+                key={index}
+                imageSrc={image.url}
+                descricao={image.descricao}
+                isFavorita={false}
+                dispatch={addFavoritas}
+                item={image}
+              />
+            ))}
+          </InfiniteScroll>
         </Container>
-      </InfiniteScroll>
+
+        {!hasMore && (
+          <ContainerConcluido>
+            <strong>Isso é tudo</strong>
+            <ConcluidoDetail>
+              <SeparadorConcluido />
+              <i className="fas fa-check-circle" />
+              <SeparadorConcluido />
+            </ConcluidoDetail>
+          </ContainerConcluido>
+        )}
+      </Fragment>
     );
   }
 }

@@ -30,7 +30,7 @@ export const ContainerItemCol2 = styled(ContainerItem)`
 export const LinkHeader = styled(Link)`
   font-weight: bold;
   padding: 10px 15px;
-  color: #8e8e8e;
+  color: ${props => (props.path === props.to && props.to ? "#000" : "#8e8e8e")};
   border-radius: 50px;
   background: transparent;
   cursor: pointer;
@@ -70,6 +70,10 @@ export const ContainerSearch = styled.div`
     margin-right: 10px;
     font-size: 1.2em;
     color: #8e8e8e;
+  }
+
+  & form {
+    flex: 1;
   }
 
   & input {

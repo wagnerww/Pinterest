@@ -4,7 +4,8 @@ export const Types = {
   REQUEST_IMAGENS: "IMAGENS/REQUEST_IMAGENS",
   SUCCESS_IMAGENS: "IMAGENS/SUCCESS_IMAGENS",
   FAILURE_IMAGENS: "IMAGENS/FAILURE_IMAGENS",
-  NEXT_PAGE_IMAGENS: "IMAGENS/NEXT_PAGE_IMAGENS"
+  NEXT_PAGE_IMAGENS: "IMAGENS/NEXT_PAGE_IMAGENS",
+  SEARCH_IMAGENS: "IMAGENS/SEARCH_IMAGENS"
 };
 
 const INITIAL_STATE = Immutable({
@@ -50,7 +51,7 @@ export const Creators = {
 
   successImagens: (data, totalRecords) => ({
     type: Types.SUCCESS_IMAGENS,
-    payload: { data }
+    payload: { data, totalRecords }
   }),
 
   failureImagens: () => ({
@@ -61,5 +62,10 @@ export const Creators = {
   nextPageImagens: (data, totalRecords) => ({
     type: Types.NEXT_PAGE_IMAGENS,
     payload: { data, totalRecords }
+  }),
+
+  searchImagens: search => ({
+    type: Types.SEARCH_IMAGENS,
+    payload: { search }
   })
 };

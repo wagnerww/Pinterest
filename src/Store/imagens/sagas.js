@@ -12,7 +12,8 @@ export function* requestImagens({ payload }) {
     );
 
     const { data } = response;
-    const totalRecords = response.headers["x-total-count"];
+    const totalRecords = yield response.headers["x-total-count"];
+    console.log("total", totalRecords);
 
     if (page === 1) {
       yield put(Creators.successImagens(data, totalRecords));

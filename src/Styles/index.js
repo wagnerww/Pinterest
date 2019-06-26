@@ -23,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
     color:black;
     font-size:1em;
     font-family:'Roboto', sans-serif;
+    
   }
 
   & * a{

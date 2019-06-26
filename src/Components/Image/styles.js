@@ -31,6 +31,7 @@ export const Container = styled.div`
   border-radius: 8px;
   cursor: zoom-in;
   position: relative;
+  -webkit-column-break-inside: avoid;
 
   & img {
     border-radius: 8px;
