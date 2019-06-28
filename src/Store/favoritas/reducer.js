@@ -12,13 +12,18 @@ export const Types = {
 
 const INITIAL_STATE = Immutable({
   data: [],
-  lastFavoritas: []
+  lastFavoritas: [],
+  totalRecords: 0
 });
 
 export default function favoritas(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.SUCCESS_FAVORITA:
-      return { ...state, data: action.payload.data };
+      return {
+        ...state,
+        data: action.payload.data,
+        totalRecords: action.payload.totalRecords
+      };
 
     case Types.ADD_FAVORITA:
       action.payload.favorita.criacao = Date.now();
@@ -42,7 +47,10 @@ export default function favoritas(state = INITIAL_STATE, action) {
       return { data, lastFavoritas };
 
     case Types.SUCCESS_LAST_FAVORITAS:
-      return { ...state, lastFavoritas: action.payload.data };
+      return {
+        ...state,
+        lastFavoritas: action.payload.data
+      };
 
     default:
       return state;
@@ -50,14 +58,14 @@ export default function favoritas(state = INITIAL_STATE, action) {
 }
 
 export const Creators = {
-  requestFavoritas: () => ({
+  requestFavoritas: (page, search) => ({
     type: Types.REQUEST_FAVORITA,
-    payload: {}
+    payload: { page, search }
   }),
 
-  successFavoritas: data => ({
+  successFavoritas: (data, totalRecords) => ({
     type: Types.SUCCESS_FAVORITA,
-    payload: { data }
+    payload: { data, totalRecords }
   }),
 
   addFavoritas: favorita => ({

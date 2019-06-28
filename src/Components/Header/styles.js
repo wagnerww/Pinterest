@@ -6,6 +6,7 @@ export const HeaderMenu = styled.header`
   width: 100%;
   background: #ffffff;
   z-index: 3;
+  border-bottom: 1px solid #efefef;
 `;
 
 export const Container = styled.ul`

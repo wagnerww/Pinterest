@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { withRouter } from "react-router-dom";
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -48,12 +49,16 @@ class Header extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { path } = this.props.match;
-    if (path === "/") {
-      const { searchImagens } = this.props;
-      this.setState({ search: "" });
-      searchImagens(this.state.search);
+    const { search } = this.state;
+    this.setState({ search: "" });
+    /*  if (path === "/") {
+      const { requestImagens } = this.props;
+      requestImagens(1, search);
     } else {
-    }
+      const { requestFavoritas } = this.props;
+      requestFavoritas(1, search);
+    }*/
+    this.props.history.push(`/search/${search}`);
   };
 
   render() {
@@ -76,6 +81,7 @@ class Header extends Component {
                   placeholder="Pesquisar"
                   name="search"
                   onChange={this.handleChange}
+                  value={this.state.search}
                 />
               </form>
             </ContainerSearch>
@@ -126,7 +132,4 @@ class Header extends Component {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ ...ImagensCreators, ...FavoritasCreators }, dispatch);
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Header);
+export default withRouter(Header);

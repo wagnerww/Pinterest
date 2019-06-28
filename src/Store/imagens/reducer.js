@@ -9,7 +9,6 @@ export const Types = {
 };
 
 const INITIAL_STATE = Immutable({
-  isLoading: false,
   data: [],
   totalRecords: 0
 });
@@ -17,18 +16,16 @@ const INITIAL_STATE = Immutable({
 export default function imagens(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.REQUEST_IMAGENS:
-      return { ...state, isLoading: true, totalRecords: 0 };
+      return { ...state, totalRecords: 0 };
 
     case Types.SUCCESS_IMAGENS:
       return {
-        isLoading: false,
         data: action.payload.data,
         totalRecords: action.payload.totalRecords
       };
 
     case Types.NEXT_PAGE_IMAGENS: {
       const dados = {
-        isLoading: false,
         data: [...state.data, ...action.payload.data],
         totalRecords: action.payload.totalRecords
       };
@@ -36,7 +33,7 @@ export default function imagens(state = INITIAL_STATE, action) {
       return dados;
     }
     case Types.FAILURE_IMAGENS:
-      return { isLoading: false };
+      return {};
 
     default:
       return state;
@@ -44,9 +41,9 @@ export default function imagens(state = INITIAL_STATE, action) {
 }
 
 export const Creators = {
-  requestImagens: page => ({
+  requestImagens: (page, search) => ({
     type: Types.REQUEST_IMAGENS,
-    payload: { page }
+    payload: { page, search }
   }),
 
   successImagens: (data, totalRecords) => ({
@@ -62,10 +59,5 @@ export const Creators = {
   nextPageImagens: (data, totalRecords) => ({
     type: Types.NEXT_PAGE_IMAGENS,
     payload: { data, totalRecords }
-  }),
-
-  searchImagens: search => ({
-    type: Types.SEARCH_IMAGENS,
-    payload: { search }
   })
 };

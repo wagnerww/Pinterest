@@ -10,7 +10,7 @@ import Favoritas from "./Pages/Favoritas";
 const Main = ({ component: Component, ...props }) => (
   <Fragment>
     <Header {...props} />
-    <Component />
+    <Component {...props} />
     <Toast />
   </Fragment>
 );
@@ -21,6 +21,16 @@ const Routes = () => (
       <Route
         exact
         path="/"
+        render={props => <Main component={Inicio} {...props} />}
+      />
+      <Route
+        exact
+        path="/search"
+        render={props => <Main component={Inicio} {...props} />}
+      />
+      <Route
+        exact
+        path="/search/:search"
         render={props => <Main component={Inicio} {...props} />}
       />
       <Route

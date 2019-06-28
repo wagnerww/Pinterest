@@ -5,15 +5,16 @@ import api from "../../Services/api";
 
 export function* requestImagens({ payload }) {
   try {
-    const { page } = payload;
+    const { page, search } = payload;
     const response = yield call(
       api.get,
-      `/imagens?_limit=10&_page=${page ? page : 1}`
+      `/imagens?_limit=10&_page=${page ? page : 1}${
+        search ? `&descricao_like=${search}` : ""
+      }`
     );
 
     const { data } = response;
     const totalRecords = yield response.headers["x-total-count"];
-    console.log("total", totalRecords);
 
     if (page === 1) {
       yield put(Creators.successImagens(data, totalRecords));

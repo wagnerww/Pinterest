@@ -22,26 +22,34 @@ class Inicio extends Component {
   };
 
   componentDidMount() {
-    this.loadPage();
+    const { search } = this.props.match.params;
+    this.loadPage(search, 1);
   }
 
-  loadPage = () => {
-    let nextPage = this.state.page + 1;
-    const { requestImagens } = this.props;
-    const { imagens } = this.props;
+  componentDidUpdate(prevProps, prevState) {
+    const { search } = this.props.match.params;
+    if (search !== prevProps.match.params.search) {
+      this.loadPage(search, 1);
+    }
+  }
+
+  loadPage = (search, page) => {
+    const { requestImagens, imagens } = this.props;
     const { totalRecords, data } = imagens;
+
     let hasMore = true;
     if (totalRecords == data.length && totalRecords != 0) {
       hasMore = false;
     }
 
+    let nextPage = page ? page : this.state.page + 1;
     this.setState({ page: nextPage, hasMore });
-    requestImagens(nextPage);
+    requestImagens(nextPage, search);
   };
 
   render() {
     const { addFavoritas, imagens } = this.props;
-    const { data = [] } = imagens;
+    const { data } = imagens;
     const { hasMore } = this.state;
 
     return (

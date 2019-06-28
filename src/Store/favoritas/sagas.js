@@ -3,10 +3,18 @@ import api from "../../Services/api";
 import { Creators as ActionsFavoritas } from "./reducer";
 import { Creators as ActionsToast } from "../toast/reducer";
 
-export function* requestFavoritas() {
+export function* requestFavoritas({ payload }) {
   try {
-    const { data } = yield call(api.get, "/favoritas");
-    yield put(ActionsFavoritas.successFavoritas(data));
+    const { page, search } = payload;
+    const response = yield call(
+      api.get,
+      `/favoritas?_limit=10&_page=${page ? page : 1}${
+        search ? `&descricao_like=${search}` : ""
+      }`
+    );
+    const { data } = response;
+    const totalRecords = yield response.headers["x-total-count"];
+    yield put(ActionsFavoritas.successFavoritas(data, totalRecords));
   } catch (error) {}
 }
 
@@ -17,6 +25,7 @@ export function* requestLastFavoritas({ payload }) {
       api.get,
       `/favoritas?_sort=criacao&_order=desc&_limit=${limit}`
     );
+
     yield put(ActionsFavoritas.successLastFavoritas(data));
   } catch (error) {}
 }
