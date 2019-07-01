@@ -23,11 +23,12 @@ class Inicio extends Component {
 
   componentDidMount() {
     const { search } = this.props.match.params;
-    this.loadPage(search, 1);
+    this.loadPage(search, 1, true);
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { search } = this.props.match.params;
+
     if (search !== prevProps.match.params.search) {
       this.loadPage(search, 1);
     }
@@ -38,7 +39,7 @@ class Inicio extends Component {
     const { totalRecords, data } = imagens;
 
     let hasMore = true;
-    if (totalRecords == data.length && totalRecords != 0) {
+    if (totalRecords == data.length && totalRecords != 0 && page !== 1) {
       hasMore = false;
     }
 
@@ -49,7 +50,7 @@ class Inicio extends Component {
 
   render() {
     const { addFavoritas, imagens } = this.props;
-    const { data } = imagens;
+    const { data = [] } = imagens;
     const { hasMore } = this.state;
 
     return (

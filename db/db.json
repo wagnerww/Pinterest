@@ -118,28 +118,16 @@
   ],
   "favoritas": [
     {
-      "id": 7,
-      "url": "https://i.pinimg.com/236x/35/10/c3/3510c32abd352ac3fed7152763dfa6f9.jpg",
+      "id": 10,
+      "url": "https://i.pinimg.com/236x/ff/b0/91/ffb091eab61a332742325c35eb1cc8fb.jpg",
       "descricao": "Alguma descricao que eu quero que apareca neste mesmo luga estou escrevendo",
-      "criacao": 1561482171041
+      "criacao": 1561989137581
     },
     {
       "id": 1,
       "url": "https://i.pinimg.com/236x/0c/e5/0c/0ce50c00a415c85a6af7233c0504d219.jpg",
       "descricao": "Alguma descricao que eu quero que apareca neste mesmo luga estou escrevendo",
-      "criacao": 1561556255586
-    },
-    {
-      "id": 8,
-      "url": "https://i.pinimg.com/236x/86/78/24/867824ab63c5aa7be3355c7bcd78fe74.jpg",
-      "descricao": "Alguma descricao que eu quero que apareca neste mesmo luga estou escrevendo",
-      "criacao": 1561661334582
-    },
-    {
-      "id": 10,
-      "url": "https://i.pinimg.com/236x/ff/b0/91/ffb091eab61a332742325c35eb1cc8fb.jpg",
-      "descricao": "Alguma descricao que eu quero que apareca neste mesmo luga estou escrevendo",
-      "criacao": 1561661337191
+      "criacao": 1561990689217
     }
   ]
 }

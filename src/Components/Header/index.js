@@ -1,11 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { Creators as ImagensCreators } from "../../Store/imagens/reducer";
-import { Creators as FavoritasCreators } from "../../Store/favoritas/reducer";
-
 import {
   Container,
   ContainerItem,
@@ -48,16 +43,8 @@ class Header extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { path } = this.props.match;
     const { search } = this.state;
     this.setState({ search: "" });
-    /*  if (path === "/") {
-      const { requestImagens } = this.props;
-      requestImagens(1, search);
-    } else {
-      const { requestFavoritas } = this.props;
-      requestFavoritas(1, search);
-    }*/
     this.props.history.push(`/search/${search}`);
   };
 
@@ -68,7 +55,7 @@ class Header extends Component {
       <HeaderMenu id="myHeader">
         <Container>
           <ContainerItem>
-            <IconLogo>
+            <IconLogo to="/">
               <i className="fab fa-pinterest logo" />
             </IconLogo>
           </ContainerItem>
@@ -97,7 +84,7 @@ class Header extends Component {
             </LinkHeader>
           </ContainerItem>
           <ContainerItem>
-            <LinkHeader>
+            <LinkHeader to="">
               <Profile>
                 <img
                   src="https://i.pinimg.com/75x75_RS/e6/40/1a/e6401aa48c2b83d61dbb0358d0c84628.jpg"
@@ -108,12 +95,12 @@ class Header extends Component {
             </LinkHeader>
           </ContainerItem>
           <ContainerItem>
-            <IconLink>
+            <IconLink to="">
               <i class="fas fa-comment-dots" />
             </IconLink>
           </ContainerItem>
           <ContainerItem>
-            <IconLink>
+            <IconLink to="">
               <i class="fas fa-bell" />
             </IconLink>
           </ContainerItem>
@@ -128,8 +115,5 @@ class Header extends Component {
     );
   }
 }
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ ...ImagensCreators, ...FavoritasCreators }, dispatch);
 
 export default withRouter(Header);

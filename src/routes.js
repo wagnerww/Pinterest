@@ -29,12 +29,10 @@ const Routes = () => (
         render={props => <Main component={Inicio} {...props} />}
       />
       <Route
-        exact
         path="/search/:search"
         render={props => <Main component={Inicio} {...props} />}
       />
       <Route
-        exact
         path="/favoritas"
         render={props => <Main component={Favoritas} {...props} />}
       />
