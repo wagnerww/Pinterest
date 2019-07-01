@@ -61,7 +61,7 @@ class Header extends Component {
           </ContainerItem>
           <ContainerItemCol2>
             <ContainerSearch>
-              <i class="fas fa-search" />
+              <i className="fas fa-search" />
               <form onSubmit={this.handleSubmit}>
                 <input
                   type="text"
@@ -96,17 +96,17 @@ class Header extends Component {
           </ContainerItem>
           <ContainerItem>
             <IconLink to="">
-              <i class="fas fa-comment-dots" />
+              <i className="fas fa-comment-dots" />
             </IconLink>
           </ContainerItem>
           <ContainerItem>
             <IconLink to="">
-              <i class="fas fa-bell" />
+              <i className="fas fa-bell" />
             </IconLink>
           </ContainerItem>
           <ContainerItem>
             <IconLink>
-              <i class="fab fa-gratipay" />
+              <i className="fab fa-gratipay" />
               <Baloon />
             </IconLink>
           </ContainerItem>
