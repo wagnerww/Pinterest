@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://67.205.141.195:3001"
+  baseURL: "https://pin.exemplos-ww.xyz"
 });
 
 export default api;
